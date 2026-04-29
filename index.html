@@ -13,6 +13,9 @@
       --azul-medio: #2563eb;
       --azul-suave: #edf4ff;
       --celeste: #38bdf8;
+      --verde: #0f766e;
+      --ambar: #b7791f;
+      --rojo: #b42318;
       --fondo: #f5f8fc;
       --blanco: #ffffff;
       --texto: #172033;
@@ -76,6 +79,7 @@
       align-items: center;
       gap: 14px;
       min-width: 260px;
+      cursor: pointer;
     }
 
     .brand-logo {
@@ -126,18 +130,36 @@
       flex-wrap: wrap;
     }
 
-    .menu a {
+    .menu button {
+      border: 0;
+      background: transparent;
       padding: 10px 14px;
       border-radius: 999px;
       font-size: 14px;
       font-weight: 700;
       color: var(--azul-profundo);
       transition: 0.25s ease;
+      cursor: pointer;
+      font-family: inherit;
     }
 
-    .menu a:hover {
+    .menu button:hover {
       background: var(--azul-suave);
       transform: translateY(-1px);
+    }
+
+    .page {
+      display: none;
+      animation: pageIn 0.45s ease;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes pageIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .hero {
@@ -187,7 +209,10 @@
     .hero-panel,
     .glass-card,
     .client-card,
-    .access-card {
+    .access-card,
+    .folder-card,
+    .document-card,
+    .sedes-card {
       background: rgba(255, 255, 255, 0.88);
       border: 1px solid rgba(220, 231, 245, 0.92);
       box-shadow: var(--sombra);
@@ -257,7 +282,8 @@
       gap: 12px;
     }
 
-    .btn {
+    .btn,
+    .btn-link {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -267,6 +293,9 @@
       font-weight: 800;
       font-size: 14px;
       transition: 0.25s ease;
+      border: 0;
+      cursor: pointer;
+      font-family: inherit;
     }
 
     .btn-primary {
@@ -281,7 +310,20 @@
       border: 1px solid #d7e6fb;
     }
 
-    .btn:hover {
+    .btn-outline {
+      background: #ffffff;
+      color: var(--azul-sepsa);
+      border: 1px solid var(--borde);
+    }
+
+    .btn-download {
+      background: #eefaf8;
+      color: var(--verde);
+      border: 1px solid #cce9e4;
+    }
+
+    .btn:hover,
+    .btn-link:hover {
       transform: translateY(-3px);
     }
 
@@ -340,7 +382,7 @@
     .section-head p {
       color: var(--texto-suave);
       line-height: 1.6;
-      max-width: 760px;
+      max-width: 780px;
     }
 
     .pill {
@@ -368,6 +410,11 @@
       transition: 0.28s ease;
       position: relative;
       overflow: hidden;
+      border: 1px solid rgba(220, 231, 245, 0.92);
+      cursor: pointer;
+      text-align: left;
+      font-family: inherit;
+      color: inherit;
     }
 
     .access-card::after {
@@ -420,21 +467,31 @@
       z-index: 1;
     }
 
-    .clients-grid {
+    .clients-grid,
+    .folder-grid,
+    .sedes-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 22px;
     }
 
-    .client-card {
+    .client-card,
+    .folder-card,
+    .sedes-card {
       border-radius: 28px;
       padding: 24px;
       transition: 0.32s ease;
       position: relative;
       overflow: hidden;
+      cursor: pointer;
+      text-align: left;
+      font-family: inherit;
+      color: inherit;
     }
 
-    .client-card::before {
+    .client-card::before,
+    .folder-card::before,
+    .sedes-card::before {
       content: "";
       position: absolute;
       inset: 0;
@@ -443,28 +500,35 @@
       transition: 0.32s ease;
     }
 
-    .client-card:hover {
+    .client-card:hover,
+    .folder-card:hover,
+    .sedes-card:hover {
       transform: translateY(-7px);
       box-shadow: 0 25px 55px rgba(13, 36, 83, 0.14);
     }
 
-    .client-card:hover::before {
+    .client-card:hover::before,
+    .folder-card:hover::before,
+    .sedes-card:hover::before {
       opacity: 1;
     }
 
-    .client-inner {
+    .client-inner,
+    .folder-inner {
       position: relative;
       z-index: 1;
     }
 
-    .client-top {
+    .client-top,
+    .folder-top {
       display: flex;
       align-items: center;
       gap: 16px;
       margin-bottom: 14px;
     }
 
-    .client-logo {
+    .client-logo,
+    .folder-icon {
       width: 78px;
       height: 78px;
       border-radius: 22px;
@@ -476,6 +540,11 @@
       flex-shrink: 0;
       overflow: hidden;
       box-shadow: var(--sombra-suave);
+    }
+
+    .folder-icon {
+      font-size: 33px;
+      color: var(--azul-sepsa);
     }
 
     .client-logo img {
@@ -492,35 +561,44 @@
       text-align: center;
     }
 
-    .client-name {
+    .client-name,
+    .folder-name {
       color: var(--azul-profundo);
       font-size: 23px;
       margin-bottom: 5px;
       letter-spacing: -0.4px;
     }
 
-    .client-phrase {
+    .client-phrase,
+    .folder-phrase {
       color: var(--azul-sepsa);
       font-size: 14px;
       font-weight: 800;
       line-height: 1.35;
     }
 
-    .client-desc {
+    .client-desc,
+    .folder-desc {
       color: var(--texto-suave);
       font-size: 15px;
       line-height: 1.65;
       margin: 14px 0 18px;
-      min-height: 74px;
+      min-height: 58px;
     }
 
-    .client-links {
+    .client-links,
+    .folder-actions,
+    .doc-actions {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 10px;
     }
 
-    .client-links a {
+    .client-links a,
+    .folder-actions a,
+    .folder-actions button,
+    .doc-actions a,
+    .doc-actions button {
       min-height: 46px;
       display: flex;
       align-items: center;
@@ -534,11 +612,108 @@
       font-size: 14px;
       font-weight: 800;
       transition: 0.24s ease;
+      font-family: inherit;
+      cursor: pointer;
     }
 
-    .client-links a:hover {
+    .client-links a:hover,
+    .folder-actions a:hover,
+    .folder-actions button:hover,
+    .doc-actions a:hover,
+    .doc-actions button:hover {
       background: #dfeeff;
       transform: translateY(-2px);
+    }
+
+    .folder-actions .external,
+    .doc-actions .external {
+      background: #eefaf8;
+      color: var(--verde);
+      border: 1px solid #cce9e4;
+    }
+
+    .folder-actions .download,
+    .doc-actions .download {
+      background: #fff7ed;
+      color: var(--ambar);
+      border: 1px solid #fde4bf;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+      color: var(--texto-suave);
+      font-size: 14px;
+    }
+
+    .breadcrumb button {
+      border: 0;
+      background: transparent;
+      color: var(--azul-sepsa);
+      font-weight: 800;
+      cursor: pointer;
+      font-family: inherit;
+      padding: 0;
+    }
+
+    .internal-header {
+      padding: 38px 0 18px;
+    }
+
+    .internal-hero {
+      background: rgba(255, 255, 255, 0.90);
+      border: 1px solid var(--borde);
+      border-radius: 30px;
+      padding: 28px;
+      box-shadow: var(--sombra);
+    }
+
+    .internal-hero h1 {
+      font-size: clamp(30px, 4vw, 44px);
+      margin-bottom: 12px;
+    }
+
+    .internal-hero p {
+      color: var(--texto-suave);
+      line-height: 1.7;
+      max-width: 850px;
+    }
+
+    .internal-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .document-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .document-card {
+      border-radius: 22px;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 1fr 310px;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .document-card h3 {
+      color: var(--azul-profundo);
+      margin-bottom: 7px;
+      font-size: 19px;
+    }
+
+    .document-card p {
+      color: var(--texto-suave);
+      line-height: 1.55;
+      font-size: 14px;
     }
 
     .note-box {
@@ -588,7 +763,7 @@
       flex-wrap: wrap;
     }
 
-    .footer-actions a {
+    .footer-actions button {
       padding: 10px 14px;
       border-radius: 12px;
       background: rgba(255, 255, 255, 0.10);
@@ -596,9 +771,12 @@
       font-size: 14px;
       font-weight: 800;
       transition: 0.25s ease;
+      border: 0;
+      cursor: pointer;
+      font-family: inherit;
     }
 
-    .footer-actions a:hover {
+    .footer-actions button:hover {
       background: rgba(255, 255, 255, 0.18);
       transform: translateY(-2px);
     }
@@ -616,7 +794,9 @@
 
     @media (max-width: 980px) {
       .hero-grid,
-      .clients-grid {
+      .clients-grid,
+      .folder-grid,
+      .sedes-grid {
         grid-template-columns: 1fr;
       }
 
@@ -627,6 +807,10 @@
       .section-head {
         align-items: flex-start;
         flex-direction: column;
+      }
+
+      .document-card {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -654,21 +838,28 @@
 
       .hero-main,
       .hero-panel,
-      .client-card {
+      .client-card,
+      .folder-card,
+      .sedes-card,
+      .internal-hero {
         border-radius: 24px;
         padding: 22px;
       }
 
       .quick-grid,
-      .client-links {
+      .client-links,
+      .folder-actions,
+      .doc-actions {
         grid-template-columns: 1fr;
       }
 
-      .client-top {
+      .client-top,
+      .folder-top {
         align-items: flex-start;
       }
 
-      .client-logo {
+      .client-logo,
+      .folder-icon {
         width: 68px;
         height: 68px;
       }
@@ -679,248 +870,450 @@
 <body>
   <header class="topbar">
     <div class="container nav">
-      <a class="brand" href="#inicio" aria-label="Volver al inicio">
+      <button class="brand" onclick="goToPage('inicio')" aria-label="Volver al inicio">
         <img class="brand-logo" src="assets/logos/sepsa.png" alt="Logo SEPSA" onerror="this.style.display='none'; document.querySelector('.brand-fallback').style.display='flex';" />
         <div class="brand-fallback">SEPSA</div>
         <div class="brand-text">
           <small>Portal digital corporativo</small>
           <strong>Gestión operativa y documentaria</strong>
         </div>
-      </a>
+      </button>
 
       <nav class="menu" aria-label="Menú principal">
-        <a href="#inicio">Inicio</a>
-        <a href="#accesos">Accesos</a>
-        <a href="#clientes">Clientes</a>
-        <a href="#uso">Uso del portal</a>
+        <button onclick="goToPage('inicio')">Inicio</button>
+        <button onclick="goToPage('inicio', 'accesos')">Accesos</button>
+        <button onclick="goToPage('inicio', 'clientes')">Clientes</button>
+        <button onclick="goToPage('pd-home')">Pesquera Diamante</button>
       </nav>
     </div>
   </header>
 
   <main>
-    <section class="hero" id="inicio">
-      <div class="container hero-grid">
-        <div class="hero-main reveal">
-          <div class="hero-content">
-            <div class="label"><span></span> SEPSA · Gestión digital conectada a la nube</div>
-            <h1>Un solo portal para organizar la gestión operativa de nuestros servicios</h1>
-            <p>
-              Plataforma de acceso rápido a documentos, procedimientos, registros, formularios y evidencias de campo vinculadas a los clientes principales de SEPSA.
-            </p>
-            <div class="actions">
-              <a class="btn btn-primary" href="#clientes">Ver clientes</a>
-              <a class="btn btn-secondary" href="#accesos">Ir a accesos rápidos</a>
-            </div>
-          </div>
-        </div>
-
-        <aside class="hero-panel reveal" aria-label="Resumen del portal">
-          <div class="metric">
-            <strong>4 clientes</strong>
-            <span>Pesquera Diamante, HOLCIM, AZUMA y KAMPO MARINO.</span>
-          </div>
-          <div class="metric">
-            <strong>1 acceso central</strong>
-            <span>Documentos, formatos, evidencias y formularios organizados por servicio.</span>
-          </div>
-          <div class="metric">
-            <strong>Gestión simple</strong>
-            <span>Diseñado para consulta rápida desde computadora, tablet o celular.</span>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <section id="accesos">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <h2>Accesos principales</h2>
-            <p>Estos bloques permiten ordenar la información que el personal necesita consultar o cargar durante la ejecución del servicio.</p>
-          </div>
-          <div class="pill">Uso interno SEPSA</div>
-        </div>
-
-        <div class="quick-grid">
-          <a class="access-card reveal" href="#clientes">
-            <div class="icon-box">📁</div>
-            <h3>Documentos</h3>
-            <p>Procedimientos, instructivos, formatos vigentes y archivos de consulta por cliente.</p>
-          </a>
-
-          <a class="access-card reveal" href="#clientes">
-            <div class="icon-box">📝</div>
-            <h3>Registros</h3>
-            <p>Acceso a registros operativos, controles de campo, asistencia y seguimiento documentario.</p>
-          </a>
-
-          <a class="access-card reveal" href="#clientes">
-            <div class="icon-box">📷</div>
-            <h3>Evidencias</h3>
-            <p>Carpetas para cargar fotografías, sustentos de actividades y respaldos del servicio.</p>
-          </a>
-
-          <a class="access-card reveal" href="#clientes">
-            <div class="icon-box">✅</div>
-            <h3>Formularios</h3>
-            <p>Reportes digitales para incidentes, condiciones inseguras, solicitudes y novedades operativas.</p>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section id="clientes">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <h2>Clientes incluidos en el portal</h2>
-            <p>Selecciona el cliente correspondiente para acceder a sus documentos, registros, evidencias y formularios de trabajo.</p>
-          </div>
-          <div class="pill">Acceso por servicio</div>
-        </div>
-
-        <div class="clients-grid">
-          <article class="client-card reveal">
-            <div class="client-inner">
-              <div class="client-top">
-                <div class="client-logo">
-                  <img src="assets/logos/diamante.png" alt="Logo Pesquera Diamante" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-                  <div class="initials" style="display:none;">PD</div>
-                </div>
-                <div>
-                  <h3 class="client-name">Pesquera Diamante</h3>
-                  <div class="client-phrase">Orden operativo, trazabilidad y soporte documentario del servicio.</div>
-                </div>
-              </div>
-
-              <p class="client-desc">
-                Acceso a información operativa, procedimientos, formatos, registros, evidencias fotográficas y formularios vinculados a las actividades desarrolladas para Pesquera Diamante.
+    <div id="page-inicio" class="page active">
+      <section class="hero" id="inicio">
+        <div class="container hero-grid">
+          <div class="hero-main reveal">
+            <div class="hero-content">
+              <div class="label"><span></span> SEPSA · Gestión digital conectada a la nube</div>
+              <h1>Un solo portal para organizar la gestión operativa de nuestros servicios</h1>
+              <p>
+                Plataforma de acceso rápido a documentos, procedimientos, registros, formularios y evidencias de campo vinculadas a los clientes principales de SEPSA.
               </p>
-
-              <div class="client-links">
-                <a href="TU_ENLACE_DIAMANTE_DOCUMENTOS" target="_blank" rel="noopener">Documentos</a>
-                <a href="TU_ENLACE_DIAMANTE_REGISTROS" target="_blank" rel="noopener">Registros</a>
-                <a href="TU_ENLACE_DIAMANTE_EVIDENCIAS" target="_blank" rel="noopener">Evidencias</a>
-                <a href="TU_ENLACE_DIAMANTE_FORMULARIOS" target="_blank" rel="noopener">Formularios</a>
+              <div class="actions">
+                <button class="btn btn-primary" onclick="goToPage('inicio', 'clientes')">Ver clientes</button>
+                <button class="btn btn-secondary" onclick="goToPage('inicio', 'accesos')">Ir a accesos rápidos</button>
               </div>
             </div>
-          </article>
+          </div>
 
-          <article class="client-card reveal">
-            <div class="client-inner">
-              <div class="client-top">
-                <div class="client-logo">
-                  <img src="assets/logos/holcim.png" alt="Logo HOLCIM" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-                  <div class="initials" style="display:none;">HOLCIM</div>
-                </div>
-                <div>
-                  <h3 class="client-name">HOLCIM</h3>
-                  <div class="client-phrase">Control, continuidad y acceso rápido para la operación.</div>
-                </div>
-              </div>
-
-              <p class="client-desc">
-                Espacio de consulta y carga documentaria para el seguimiento operativo, control de recursos, registros de campo y evidencias asociadas a los servicios brindados a HOLCIM.
-              </p>
-
-              <div class="client-links">
-                <a href="TU_ENLACE_HOLCIM_DOCUMENTOS" target="_blank" rel="noopener">Documentos</a>
-                <a href="TU_ENLACE_HOLCIM_REGISTROS" target="_blank" rel="noopener">Registros</a>
-                <a href="TU_ENLACE_HOLCIM_EVIDENCIAS" target="_blank" rel="noopener">Evidencias</a>
-                <a href="TU_ENLACE_HOLCIM_FORMULARIOS" target="_blank" rel="noopener">Formularios</a>
-              </div>
+          <aside class="hero-panel reveal" aria-label="Resumen del portal">
+            <div class="metric">
+              <strong>4 clientes</strong>
+              <span>Pesquera Diamante, HOLCIM, AZUMA y KAMPO MARINO.</span>
             </div>
-          </article>
-
-          <article class="client-card reveal">
-            <div class="client-inner">
-              <div class="client-top">
-                <div class="client-logo">
-                  <img src="assets/logos/azuma.png" alt="Logo AZUMA" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-                  <div class="initials" style="display:none;">AZ</div>
-                </div>
-                <div>
-                  <h3 class="client-name">AZUMA</h3>
-                  <div class="client-phrase">Información accesible para una gestión más eficiente.</div>
-                </div>
-              </div>
-
-              <p class="client-desc">
-                Repositorio de acceso a documentos, reportes, registros y evidencias requeridas para mantener el orden y trazabilidad de la gestión operativa del servicio asignado a AZUMA.
-              </p>
-
-              <div class="client-links">
-                <a href="TU_ENLACE_AZUMA_DOCUMENTOS" target="_blank" rel="noopener">Documentos</a>
-                <a href="TU_ENLACE_AZUMA_REGISTROS" target="_blank" rel="noopener">Registros</a>
-                <a href="TU_ENLACE_AZUMA_EVIDENCIAS" target="_blank" rel="noopener">Evidencias</a>
-                <a href="TU_ENLACE_AZUMA_FORMULARIOS" target="_blank" rel="noopener">Formularios</a>
-              </div>
+            <div class="metric">
+              <strong>1 acceso central</strong>
+              <span>Documentos, formatos, evidencias y formularios organizados por servicio.</span>
             </div>
-          </article>
-
-          <article class="client-card reveal">
-            <div class="client-inner">
-              <div class="client-top">
-                <div class="client-logo">
-                  <img src="assets/logos/kampo-marino.png" alt="Logo KAMPO MARINO" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-                  <div class="initials" style="display:none;">KM</div>
-                </div>
-                <div>
-                  <h3 class="client-name">KAMPO MARINO</h3>
-                  <div class="client-phrase">Trazabilidad y respaldo digital para el servicio.</div>
-                </div>
-              </div>
-
-              <p class="client-desc">
-                Plataforma de acceso a procedimientos, registros, evidencias y formularios relacionados con la gestión operativa, documental y de seguimiento del servicio para KAMPO MARINO.
-              </p>
-
-              <div class="client-links">
-                <a href="TU_ENLACE_KAMPO_DOCUMENTOS" target="_blank" rel="noopener">Documentos</a>
-                <a href="TU_ENLACE_KAMPO_REGISTROS" target="_blank" rel="noopener">Registros</a>
-                <a href="TU_ENLACE_KAMPO_EVIDENCIAS" target="_blank" rel="noopener">Evidencias</a>
-                <a href="TU_ENLACE_KAMPO_FORMULARIOS" target="_blank" rel="noopener">Formularios</a>
-              </div>
+            <div class="metric">
+              <strong>Gestión simple</strong>
+              <span>Diseñado para consulta rápida desde computadora, tablet o celular.</span>
             </div>
-          </article>
+          </aside>
         </div>
+      </section>
 
-        <div class="note-box reveal" id="uso">
-          <strong>Indicaciones de uso:</strong> este portal funciona como acceso centralizado. Los documentos sensibles, registros del personal, evidencias internas y carpetas de carga deben mantenerse en OneDrive con permisos controlados. No publiques información confidencial directamente en el repositorio de GitHub.
+      <section id="accesos">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <h2>Accesos principales</h2>
+              <p>Estos bloques permiten ordenar la información que el personal necesita consultar o cargar durante la ejecución del servicio.</p>
+            </div>
+            <div class="pill">Uso interno SEPSA</div>
+          </div>
+
+          <div class="quick-grid">
+            <button class="access-card reveal" onclick="goToPage('pd-documentos')">
+              <div class="icon-box">📁</div>
+              <h3>Documentos</h3>
+              <p>Procedimientos, instructivos, PETS, registros SST y archivos de consulta.</p>
+            </button>
+
+            <button class="access-card reveal" onclick="goToPage('pd-registros')">
+              <div class="icon-box">📝</div>
+              <h3>Registros</h3>
+              <p>Acceso a registros operativos, controles de campo, asistencia y seguimiento documentario.</p>
+            </button>
+
+            <button class="access-card reveal" onclick="goToPage('pd-evidencias')">
+              <div class="icon-box">📷</div>
+              <h3>Evidencias</h3>
+              <p>Carpetas para cargar fotografías, sustentos de actividades y respaldos del servicio por sede.</p>
+            </button>
+
+            <button class="access-card reveal" onclick="goToPage('pd-formularios')">
+              <div class="icon-box">✅</div>
+              <h3>Formularios</h3>
+              <p>Reportes digitales para incidentes, condiciones inseguras, solicitudes y novedades operativas.</p>
+            </button>
+          </div>
         </div>
-      </div>
-    </section>
-  </main>
+      </section>
 
-  <footer class="footer">
-    <div class="container footer-content">
-      <div>
-        <h3>Portal Digital SEPSA</h3>
-        <p>
-          Gestión operativa y documentaria conectada a la nube.<br />
-          Versión 01 · Uso interno corporativo.
-        </p>
-      </div>
-      <div class="footer-actions">
-        <a href="#inicio">Inicio</a>
-        <a href="#accesos">Accesos</a>
-        <a href="#clientes">Clientes</a>
-      </div>
+      <section id="clientes">
+        <div class="container">
+          <div class="section-head reveal">
+            <div>
+              <h2>Clientes incluidos en el portal</h2>
+              <p>Selecciona el cliente correspondiente para acceder a sus documentos, registros, evidencias y formularios de trabajo.</p>
+            </div>
+            <div class="pill">Acceso por servicio</div>
+          </div>
+
+          <div class="clients-grid">
+            <article class="client-card reveal" onclick="goToPage('pd-home')">
+              <div class="client-inner">
+                <div class="client-top">
+                  <div class="client-logo">
+                    <img src="assets/logos/diamante.png" alt="Logo Pesquera Diamante" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                    <div class="initials" style="display:none;">PD</div>
+                  </div>
+                  <div>
+                    <h3 class="client-name">Pesquera Diamante</h3>
+                    <div class="client-phrase">Orden operativo, trazabilidad y soporte documentario del servicio.</div>
+                  </div>
+                </div>
+
+                <p class="client-desc">
+                  Acceso a información operativa, procedimientos, formatos, registros, evidencias fotográficas y formularios vinculados a las actividades desarrolladas para Pesquera Diamante.
+                </p>
+
+                <div class="client-links">
+                  <button onclick="event.stopPropagation(); goToPage('pd-documentos')">Documentos</button>
+                  <button onclick="event.stopPropagation(); goToPage('pd-registros')">Registros</button>
+                  <button onclick="event.stopPropagation(); goToPage('pd-evidencias')">Evidencias</button>
+                  <button onclick="event.stopPropagation(); goToPage('pd-formularios')">Formularios</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="client-card reveal">
+              <div class="client-inner">
+                <div class="client-top">
+                  <div class="client-logo">
+                    <img src="assets/logos/holcim.png" alt="Logo HOLCIM" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                    <div class="initials" style="display:none;">HOLCIM</div>
+                  </div>
+                  <div>
+                    <h3 class="client-name">HOLCIM</h3>
+                    <div class="client-phrase">Control, continuidad y acceso rápido para la operación.</div>
+                  </div>
+                </div>
+                <p class="client-desc">Espacio preparado para documentación, registros, evidencias y formularios asociados al servicio.</p>
+                <div class="client-links">
+                  <a href="TU_ENLACE_HOLCIM_DOCUMENTOS" target="_blank" rel="noopener">Documentos</a>
+                  <a href="TU_ENLACE_HOLCIM_REGISTROS" target="_blank" rel="noopener">Registros</a>
+                  <a href="TU_ENLACE_HOLCIM_EVIDENCIAS" target="_blank" rel="noopener">Evidencias</a>
+                  <a href="TU_ENLACE_HOLCIM_FORMULARIOS" target="_blank" rel="noopener">Formularios</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="client-card reveal">
+              <div class="client-inner">
+                <div class="client-top">
+                  <div class="client-logo">
+                    <img src="assets/logos/azuma.png" alt="Logo AZUMA" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                    <div class="initials" style="display:none;">AZ</div>
+                  </div>
+                  <div>
+                    <h3 class="client-name">AZUMA</h3>
+                    <div class="client-phrase">Información accesible para una gestión más eficiente.</div>
+                  </div>
+                </div>
+                <p class="client-desc">Repositorio de acceso a documentos, reportes, registros y evidencias requeridas para mantener el orden del servicio.</p>
+                <div class="client-links">
+                  <a href="TU_ENLACE_AZUMA_DOCUMENTOS" target="_blank" rel="noopener">Documentos</a>
+                  <a href="TU_ENLACE_AZUMA_REGISTROS" target="_blank" rel="noopener">Registros</a>
+                  <a href="TU_ENLACE_AZUMA_EVIDENCIAS" target="_blank" rel="noopener">Evidencias</a>
+                  <a href="TU_ENLACE_AZUMA_FORMULARIOS" target="_blank" rel="noopener">Formularios</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="client-card reveal">
+              <div class="client-inner">
+                <div class="client-top">
+                  <div class="client-logo">
+                    <img src="assets/logos/kampo-marino.png" alt="Logo KAMPO MARINO" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                    <div class="initials" style="display:none;">KM</div>
+                  </div>
+                  <div>
+                    <h3 class="client-name">KAMPO MARINO</h3>
+                    <div class="client-phrase">Trazabilidad y respaldo digital para el servicio.</div>
+                  </div>
+                </div>
+                <p class="client-desc">Plataforma de acceso a procedimientos, registros, evidencias y formularios relacionados con la gestión del servicio.</p>
+                <div class="client-links">
+                  <a href="TU_ENLACE_KAMPO_DOCUMENTOS" target="_blank" rel="noopener">Documentos</a>
+                  <a href="TU_ENLACE_KAMPO_REGISTROS" target="_blank" rel="noopener">Registros</a>
+                  <a href="TU_ENLACE_KAMPO_EVIDENCIAS" target="_blank" rel="noopener">Evidencias</a>
+                  <a href="TU_ENLACE_KAMPO_FORMULARIOS" target="_blank" rel="noopener">Formularios</a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="note-box reveal">
+            <strong>Indicaciones de uso:</strong> este portal funciona como acceso centralizado. Los documentos sensibles, registros del personal, evidencias internas y carpetas de carga deben mantenerse en OneDrive con permisos controlados. No publiques información confidencial directamente en el repositorio de GitHub.
+          </div>
+        </div>
+      </section>
     </div>
-  </footer>
 
-  <script>
-    const elementos = document.querySelectorAll('.reveal');
+    <div id="page-pd-home" class="page">
+      <section class="internal-header">
+        <div class="container">
+          <div class="breadcrumb">
+            <button onclick="goToPage('inicio')">Inicio</button>
+            <span>›</span>
+            <span>Pesquera Diamante</span>
+          </div>
 
-    const observador = new IntersectionObserver((entradas) => {
-      entradas.forEach((entrada) => {
-        if (entrada.isIntersecting) {
-          entrada.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.14 });
+          <div class="internal-hero">
+            <div class="label"><span></span> Cliente · Pesquera Diamante</div>
+            <h1>Gestión documentaria y operativa</h1>
+            <p>
+              Acceso organizado a las carpetas principales del servicio: documentos, registros, evidencias y formularios. Cada sección puede dirigir a carpetas específicas de OneDrive o a páginas internas con mayor detalle.
+            </p>
+            <div class="internal-actions">
+              <button class="btn btn-secondary" onclick="goBack()">← Retroceder</button>
+              <button class="btn btn-outline" onclick="goToPage('inicio')">Ir al inicio</button>
+            </div>
+          </div>
+        </div>
+      </section>
 
-    elementos.forEach((elemento) => observador.observe(elemento));
-  </script>
-</body>
-</html>
+      <section>
+        <div class="container">
+          <div class="folder-grid">
+            <button class="folder-card" onclick="goToPage('pd-documentos')">
+              <div class="folder-inner">
+                <div class="folder-top">
+                  <div class="folder-icon">📁</div>
+                  <div>
+                    <h3 class="folder-name">01. Documentos</h3>
+                    <div class="folder-phrase">Consulta documentaria del servicio</div>
+                  </div>
+                </div>
+                <p class="folder-desc">Incluye evidencias documentarias, instructivos operativos, PETS y registros de Seguridad y Salud en el Trabajo.</p>
+              </div>
+            </button>
+
+            <button class="folder-card" onclick="goToPage('pd-registros')">
+              <div class="folder-inner">
+                <div class="folder-top">
+                  <div class="folder-icon">📝</div>
+                  <div>
+                    <h3 class="folder-name">02. Registros</h3>
+                    <div class="folder-phrase">Respaldo y trazabilidad operativa</div>
+                  </div>
+                </div>
+                <p class="folder-desc">Acceso a registros de control, seguimiento, asistencia, capacitación y sustentos del servicio.</p>
+              </div>
+            </button>
+
+            <button class="folder-card" onclick="goToPage('pd-evidencias')">
+              <div class="folder-inner">
+                <div class="folder-top">
+                  <div class="folder-icon">📷</div>
+                  <div>
+                    <h3 class="folder-name">03. Evidencias</h3>
+                    <div class="folder-phrase">Carga fotográfica por sede</div>
+                  </div>
+                </div>
+                <p class="folder-desc">Carpetas para subir evidencias de campo organizadas por Callao, Malabrigo, Mollendo y Supe.</p>
+              </div>
+            </button>
+
+            <button class="folder-card" onclick="goToPage('pd-formularios')">
+              <div class="folder-inner">
+                <div class="folder-top">
+                  <div class="folder-icon">✅</div>
+                  <div>
+                    <h3 class="folder-name">04. Formularios</h3>
+                    <div class="folder-phrase">Registro digital de información</div>
+                  </div>
+                </div>
+                <p class="folder-desc">Acceso a formularios para reportes, solicitudes, novedades operativas y levantamiento de información.</p>
+              </div>
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="page-pd-documentos" class="page">
+      <section class="internal-header">
+        <div class="container">
+          <div class="breadcrumb">
+            <button onclick="goToPage('inicio')">Inicio</button>
+            <span>›</span>
+            <button onclick="goToPage('pd-home')">Pesquera Diamante</button>
+            <span>›</span>
+            <span>01. Documentos</span>
+          </div>
+
+          <div class="internal-hero">
+            <div class="label"><span></span> 01. Documentos</div>
+            <h1>Documentos del servicio</h1>
+            <p>
+              En esta sección se organizan los documentos de consulta del servicio. Puedes usar la opción “Ver carpeta” para abrir OneDrive o ingresar a las páginas internas para visualizar documentos con opción de descarga.
+            </p>
+            <div class="internal-actions">
+              <button class="btn btn-secondary" onclick="goBack()">← Retroceder</button>
+              <button class="btn btn-outline" onclick="goToPage('pd-home')">Volver a Pesquera Diamante</button>
+              <a class="btn btn-primary" href="TU_ENLACE_DIAMANTE_DOCUMENTOS" target="_blank" rel="noopener">Abrir carpeta general</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <div class="folder-grid">
+            <article class="folder-card">
+              <div class="folder-inner">
+                <div class="folder-top">
+                  <div class="folder-icon">📷</div>
+                  <div>
+                    <h3 class="folder-name">Evidencias</h3>
+                    <div class="folder-phrase">Documentos de respaldo y sustento</div>
+                  </div>
+                </div>
+                <p class="folder-desc">Carpeta de documentos y archivos de respaldo relacionados con evidencias del servicio.</p>
+                <div class="folder-actions">
+                  <a class="external" href="TU_ENLACE_PD_DOC_EVIDENCIAS" target="_blank" rel="noopener">Ver carpeta</a>
+                  <button onclick="goToPage('pd-doc-evidencias')">Ver detalle</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="folder-card">
+              <div class="folder-inner">
+                <div class="folder-top">
+                  <div class="folder-icon">📘</div>
+                  <div>
+                    <h3 class="folder-name">Instructivos operativos</h3>
+                    <div class="folder-phrase">Guías de trabajo por actividad</div>
+                  </div>
+                </div>
+                <p class="folder-desc">Instructivos para consulta del personal operativo y gestores de campo.</p>
+                <div class="folder-actions">
+                  <a class="external" href="TU_ENLACE_PD_DOC_INSTRUCTIVOS" target="_blank" rel="noopener">Ver carpeta</a>
+                  <button onclick="goToPage('pd-doc-instructivos')">Ver detalle</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="folder-card">
+              <div class="folder-inner">
+                <div class="folder-top">
+                  <div class="folder-icon">🦺</div>
+                  <div>
+                    <h3 class="folder-name">PETS</h3>
+                    <div class="folder-phrase">Procedimientos escritos de trabajo seguro</div>
+                  </div>
+                </div>
+                <p class="folder-desc">Repositorio de PETS aplicables a las actividades operativas del servicio.</p>
+                <div class="folder-actions">
+                  <a class="external" href="TU_ENLACE_PD_DOC_PETS" target="_blank" rel="noopener">Ver carpeta</a>
+                  <button onclick="goToPage('pd-doc-pets')">Ver detalle</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="folder-card">
+              <div class="folder-inner">
+                <div class="folder-top">
+                  <div class="folder-icon">📋</div>
+                  <div>
+                    <h3 class="folder-name">Registros SST</h3>
+                    <div class="folder-phrase">Soporte preventivo y cumplimiento</div>
+                  </div>
+                </div>
+                <p class="folder-desc">Registros vinculados a Seguridad y Salud en el Trabajo aplicables al servicio.</p>
+                <div class="folder-actions">
+                  <a class="external" href="TU_ENLACE_PD_DOC_REGISTROS_SST" target="_blank" rel="noopener">Ver carpeta</a>
+                  <button onclick="goToPage('pd-doc-registros-sst')">Ver detalle</button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="page-pd-registros" class="page">
+      <section class="internal-header">
+        <div class="container">
+          <div class="breadcrumb">
+            <button onclick="goToPage('inicio')">Inicio</button>
+            <span>›</span>
+            <button onclick="goToPage('pd-home')">Pesquera Diamante</button>
+            <span>›</span>
+            <span>02. Registros</span>
+          </div>
+
+          <div class="internal-hero">
+            <div class="label"><span></span> 02. Registros</div>
+            <h1>Registros del servicio</h1>
+            <p>Acceso a la carpeta de registros de Pesquera Diamante. Puedes agregar páginas internas para separar asistencia, inspecciones, capacitación, entregas u otros registros.</p>
+            <div class="internal-actions">
+              <button class="btn btn-secondary" onclick="goBack()">← Retroceder</button>
+              <button class="btn btn-outline" onclick="goToPage('pd-home')">Volver a Pesquera Diamante</button>
+              <a class="btn btn-primary" href="TU_ENLACE_DIAMANTE_REGISTROS" target="_blank" rel="noopener">Abrir carpeta en OneDrive</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="page-pd-evidencias" class="page">
+      <section class="internal-header">
+        <div class="container">
+          <div class="breadcrumb">
+            <button onclick="goToPage('inicio')">Inicio</button>
+            <span>›</span>
+            <button onclick="goToPage('pd-home')">Pesquera Diamante</button>
+            <span>›</span>
+            <span>03. Evidencias</span>
+          </div>
+
+          <div class="internal-hero">
+            <div class="label"><span></span> 03. Evidencias</div>
+            <h1>Evidencias por sede</h1>
+            <p>Carpetas destinadas a la carga de fotografías, sustentos de actividades, verificaciones y respaldos del servicio por sede.</p>
+            <div class="internal-actions">
+              <button class="btn btn-secondary" onclick="goBack()">← Retroceder</button>
+              <button class="btn btn-outline" onclick="goToPage('pd-home')">Volver a Pesquera Diamante</button>
+              <a class="btn btn-primary" href="TU_ENLACE_DIAMANTE_EVIDENCIAS" target="_blank" rel="noopener">Abrir carpeta general</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container">
+          <div class="sedes-grid">
+            <article class="sedes-card">
+              <div class="folder-inner">
+                <div class="folder-top">
+                  <div class="folder-icon">🏭</div>
+                  <div>
+                    <h3 class="folder-name">Callao</h3>
+                    <div class="folder-phrase">Evidencias del servicio en sede Callao</div>
+                  </div>
+                </div>
+                <p class="folder-desc">Carga de fotografías, sustentos, reportes visuales y documentos de respaldo de la operación en Callao
