@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal Digital de Gestión Operativa</title>
+  <style>
+    :root {
+      --azul-principal: #12385f;
+      --azul-secundario: #1f5f8b;
+      --azul-claro: #eaf3f8;
+      --gris-fondo: #f5f7fa;
+      --gris-texto: #4b5563;
+      --gris-borde: #d9e2ec;
+      --blanco: #ffffff;
+      --verde: #1f7a5c;
+      --ambar: #b7791f;
+      --rojo: #a83232;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--gris-fondo);
+      color: #1f2933;
+      line-height: 1.5;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--azul-principal), var(--azul-secundario));
+      color: var(--blanco);
+      padding: 32px 24px;
+    }
+
+    .header-content {
+      max-width: 1180px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .logo-box {
+      width: 86px;
+      height: 86px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      max-width: 760px;
+      color: #e5edf5;
+      font-size: 16px;
+    }
+
+    nav {
+      background: var(--blanco);
+      border-bottom: 1px solid var(--gris-borde);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav-content {
+      max-width: 1180px;
+      margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 14px 24px;
+    }
+
+    .nav-content a {
+      text-decoration: none;
+      color: var(--azul-principal);
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--azul-claro);
+      font-size: 14px;
+    }
+
+    main {
+      max-width: 1180px;
+      margin: auto;
+      padding: 28px 24px 48px;
+    }
+
+    .notice {
+      background: var(--blanco);
+      border-left: 5px solid var(--azul-secundario);
+      padding: 18px 20px;
+      border-radius: 14px;
+      margin-bottom: 28px;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+    }
+
+    .notice h2 {
+      color: var(--azul-principal);
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    .notice p {
+      color: var(--gris-texto);
+    }
+
+    section {
+      margin-bottom: 34px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .section-title h2 {
+      color: var(--azul-principal);
+      font-size: 24px;
+    }
+
+    .section-title span {
+      color: var(--gris-texto);
+      font-size: 14px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--blanco);
+      border: 1px solid var(--gris-borde);
+      border-radius: 18px;
+      padding: 20px;
+      min-height: 180px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.12);
+    }
+
+    .icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      background: var(--azul-claro);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--azul-principal);
+      font-size: 23px;
+      margin-bottom: 14px;
+    }
+
+    .card h3 {
+      color: #111827;
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: var(--gris-texto);
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .card a {
+      display: inline-block;
+      text-decoration: none;
+      background: var(--azul-principal);
+      color: var(--blanco);
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .card a:hover {
+      background: var(--azul-secundario);
+    }
+
+    .status-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 30px;
+    }
+
+    .status-card {
+      background: var(--blanco);
+      border-radius: 16px;
+      padding: 18px 20px;
+      border: 1px solid var(--gris-borde);
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
+    }
+
+    .status-card h3 {
+      font-size: 15px;
+      color: var(--gris-texto);
+      margin-bottom: 6px;
+    }
+
+    .status-card strong {
+      display: block;
+      font-size: 26px;
+      color: var(--azul-principal);
+    }
+
+    .tag {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: var(--azul-claro);
+      color: var(--azul-principal);
+      font-weight: bold;
+    }
+
+    .quick-links {
+      background: var(--blanco);
+      border: 1px solid var(--gris-borde);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    .quick-links ul {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .quick-links a {
+      display: block;
+      text-decoration: none;
+      color: var(--azul-principal);
+      background: var(--azul-claro);
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    footer {
+      background: #0f2740;
+      color: #d9e2ec;
+      padding: 24px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    footer strong {
+      color: var(--blanco);
+    }
+
+    @media (max-width: 980px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .status-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .header-content {
+        grid-template-columns: 1fr;
+      }
+
+      header h1 {
+        font-size: 26px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-links ul {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div>
+        <h1>Portal Digital de Gestión Operativa</h1>
+        <p>Acceso centralizado a procedimientos, registros, formularios, carpetas de carga, evidencias fotográficas y documentación operativa de la empresa.</p>
+      </div>
+      <div class="logo-box">LOGO<br />EMPRESA</div>
+    </div>
+  </header>
+
+  <nav>
+    <div class="nav-content">
+      <a href="#operaciones">Operaciones</a>
+      <a href="#sst">Seguridad y Salud</a>
+      <a href="#registros">Registros</a>
+      <a href="#clientes">Clientes</a>
+      <a href="#formularios">Formularios</a>
+      <a href="#comunicados">Comunicados</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="notice">
+      <h2>Bienvenido al portal de gestión digital</h2>
+      <p>Este espacio permite acceder de manera rápida y ordenada a los documentos y herramientas necesarias para la gestión operativa. Antes de ingresar información, verifica que estés usando el enlace correcto y que cuentas con autorización para acceder a la carpeta correspondiente.</p>
+    </div>
+
+    <div class="status-row">
+      <div class="status-card">
+        <h3>Documentos vigentes</h3>
+        <strong>Centralizados</strong>
+        <span class="tag">Procedimientos y formatos</span>
+      </div>
+      <div class="status-card">
+        <h3>Carga de evidencias</h3>
+        <strong>En línea</strong>
+        <span class="tag">Fotos, registros y reportes</span>
+      </div>
+      <div class="status-card">
+        <h3>Gestión operativa</h3>
+        <strong>Por sede</strong>
+        <span class="tag">Clientes y servicios</span>
+      </div>
+    </div>
+
+    <section id="operaciones">
+      <div class="section-title">
+        <h2>Operaciones</h2>
+        <span>Procedimientos, instructivos y reportes del servicio</span>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div>
+            <div class="icon">📘</div>
+            <h3>Procedimientos operativos</h3>
+            <p>Consulta los procedimientos vigentes por proceso, actividad, cliente o sede.</p>
+          </div>
+          <a href="https://onedrive.live.com/" target="_blank">Ingresar</a>
+        </div>
+        <div class="card">
+          <div>
+            <div class="icon">📝</div>
+            <h3>Formatos operativos</h3>
+            <p>Accede a formatos de control, inspección, ocurrencias y seguimiento de actividades.</p>
+          </div>
+          <a href="https://onedrive.live.com/" target="_blank">Ver formatos</a>
+        </div>
+        <div class="card">
+          <div>
+            <div class="icon">📊</div>
+            <h3>Reportes diarios</h3>
+            <p>Carpeta para reportes operativos, avances, novedades y controles de campo.</p>
+          </div>
+          <a href="https://onedrive.live.com/" target="_blank">Abrir carpeta</a>
+        </div>
+        <div class="card">
+          <div>
+            <div class="icon">📦</div>
+            <h3>Control de recursos</h3>
+            <p>Seguimiento de uniformes, equipos de protección personal y materiales entregados.</p>
+          </div>
+          <a href="https://onedrive.live.com/" target="_blank">Consultar</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="sst">
+      <div class="section-title">
+        <h2>Seguridad y Salud en el Trabajo</h2>
+        <span>Documentos preventivos, capacitación y reportes</span>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div>
+            <div class="icon">🦺</div>
+            <h3>Charlas de 5 minutos</h3>
+            <p>Material breve para sensibilización del personal antes del inicio de labores.</p>
+          </div>
+          <a href="https://onedrive.live.com/" target="_blank">Ver charlas</a>
+        </div>
+        <div class="card">
+          <div>
+            <div class="icon">⚠️</div>
+            <h3>Reporte de incidentes</h3>
+            <p>Formulario para reportar incidentes, actos inseguros o condiciones inseguras.</p>
+          </div>
+          <a href="https://forms.office.com/" target="_blank">Reportar</a>
+        </div>
+        <div class="card">
+          <div>
+            <div class="icon">🔍</div>
+            <h3>Inspecciones SST</h3>
+            <p>Acceso a listas de verificación, registros de inspección y evidencias de campo.</p>
+          </div>
+          <a href="https://onedrive.live.com/" target="_blank">Ingresar</a>
+        </div>
+        <div class="card">
+          <div>
+            <div class="icon">📋</div>
+            <h3>Matriz de riesgos</h3>
+            <p>Consulta de matrices de identificación de peligros y evaluación de riesgos.</p>
+          </div>
+          <a href="https://onedrive.live.com/" target="_blank">Consultar</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="registros">
+      <div class="section-title">
+        <h2>Registros y evidencias</h2>
+        <span>Carga documentaria y respaldo fotográfico</span>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div>
+            <div class="icon">📷</div>
+            <h3>Evidencias fotográficas</h3>
+            <p>Carpeta para subir fotos de campo, actividades, entregas y verificaciones.</p>
+          </div>
+          <a href="https://onedrive.live.com/" target="_blank">Subir fotos</a>
+        </div>
+        <div class="card">
+          <div>
+            <div class="icon">✅</div>
+            <h3>Asistencia de capacitación</h3>
+            <p>Registro y respaldo de asistencia, actas y evidencias de capacitación.</p>
+          </div>
+          <a href="https://onedrive.live.com/" target="_blank">Subir registro</a>
+        </div>
+        <div class="card">
+          <div>
+            <div class="icon">📄</div>
+            <h3>Documentos del personal</h3>
+            <p>Carpeta controlada para carga y revisión documentaria del personal asignado.</p>
+          </div>
+          <a href="https://onedrive.live.com/" target="_blank">Abrir carpeta</a>
+        </div>
+        <div class="card">
+          <div>
+            <div class="icon">📁</div>
+            <h3>Registros obligatorios</h3>
+            <p>Repositorio de registros necesarios para seguimiento, auditoría y control interno.</p>
+          </div>
+          <a href="https://onedrive.live.com/" target="_blank">Ver registros</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="clientes">
+      <div class="section-title">
+        <h2>Clientes y sedes</h2>
+        <span>Accesos organizados por cliente, servicio o ubicación</span>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div>
+            <div class="icon">🏭</div>
+            <h3>Pesquera Diamante</h3>
+            <p>Documentos, reportes, evidencias y registros relacionados al servicio.</p>
+          </div>
+          <a href="https://onedrive.live.com/" target="_blank">Ingresar</a>
+        </div>
+        <div class="card">
+          <div>
+            <div class="icon">🏗️</div>
+            <h3>HOLCIM</h3>
+            <p>Control documentario y evidencias asociadas a las operaciones del cliente.</p>
+          </div>
+          <a href="https://onedrive.live.com/" target="_blank">Ingresar</a>
+        </div>
+        <div class="card">
+          <div>
+            <div class="icon">🏢</div>
+            <h3>TRUPAL</h3>
+            <p>Acceso a documentos preventivos, comunicaciones y registros del servicio.</p>
+          </div>
+          <a href="https://onedrive.live.com/" target="_blank">Ingresar</a>
+        </div>
+        <div class="card">
+          <div>
+            <div class="icon">🔧</div>
+            <h3>JESA Construcciones</h3>
+            <p>Repositorio operativo, documental y preventivo asociado al servicio.</p>
+          </div>
+          <a href="https://onedrive.live.com/" target="_blank">Ingresar</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="formularios">
+      <div class="section-title">
+        <h2>Formularios rápidos</h2>
+        <span>Registros digitales para uso de gestores y personal autorizado</span>
+      </div>
+      <div class="quick-links">
+        <h3>Accesos directos</h3>
+        <ul>
+          <li><a href="https://forms.office.com/" target="_blank">Reporte de incidente o accidente</a></li>
+          <li><a href="https://forms.office.com/" target="_blank">Reporte de condición insegura</a></li>
+          <li><a href="https://forms.office.com/" target="_blank">Solicitud de uniforme o equipo de protección</a></li>
+          <li><a href="https://forms.office.com/" target="_blank">Registro de charla o capacitación</a></li>
+          <li><a href="https://forms.office.com/" target="_blank">Solicitud documentaria interna</a></li>
+          <li><a href="https://forms.office.com/" target="_blank">Reporte de ocurrencia operativa</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="comunicados">
+      <div class="section-title">
+        <h2>Comunicados importantes</h2>
+        <span>Información vigente para el personal</span>
+      </div>
+      <div class="notice">
+        <h2>Uso correcto del portal</h2>
+        <p>La información del portal debe utilizarse únicamente para fines laborales. No se debe compartir enlaces externos sin autorización. Los documentos deben cargarse en la carpeta correspondiente, evitando duplicidades, nombres incompletos o archivos sin fecha.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>Portal Digital de Gestión Operativa</strong> | Versión 01 | Uso interno de la empresa</p>
+  </footer>
+</body>
+</html>
